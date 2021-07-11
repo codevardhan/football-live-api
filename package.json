@@ -2,13 +2,11 @@
     "name": "football-scores",
     "version": "1.0.0",
     "description": "API to get live updates for football matches",
-    "main": "index.js",
+    "main": "lib/index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
-    "keywords": [
-        "\"live-update\""
-    ],
+    "keywords": ["live-updates", "node-js", "rest-api"],
     "author": "codevardhan",
     "license": "MIT",
     "dependencies": {
