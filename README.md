@@ -1,5 +1,5 @@
-# API to get live score updates for football matches [IN_PROGRESS]
-
+# Football Score updates API [IN_PROGRESS]
+API that gives you live score updates for football matches.
 # Technology Stack
-Node JS
-Puppeteer
+* Node JS
+* Puppeteer
