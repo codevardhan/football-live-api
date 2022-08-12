@@ -38,7 +38,7 @@ function parseJSON(match_info) {
             match_info_json["score_1"] = "NaN";
             match_info_json["score_2"] = "NaN";
             match_info_json["fh_score"] = "NaN";
-        } else if (match_status == "Finished") {
+        } else if (match_status == "Finished" || match_status=="After Pen.") {
             match_info_json["status"] = "Finished";
             match_info_json["time"] = "NaN";
             match_info_json["team_1"] = match[1];
