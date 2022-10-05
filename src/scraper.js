@@ -67,8 +67,6 @@ function parseJSON(match_info) {
         }
         final_json.push(new MatchInstance(match_info_json));
     });
-
-
     return final_json;
 }
 
@@ -101,6 +99,44 @@ async function getDataFromCompName(country, comp) {
             }
             return match_info;
         });
+        data = parseJSON(data);
+        console.log(data);
+        await browser.close();
+        return data;
+    } catch (e) {
+        console.error(e);
+    }
+}
+
+async function getListMatches(country, comp) {
+    var url = "https://www.flashscore.in/football/";
+    try {
+        const browser = await puppeteer.launch();
+        const page = await browser.newPage();
+        await page.setRequestInterception(true);
+        page.on('request', (req) => {
+            if (req.resourceType() == 'font' || req.resourceType() == 'image') {
+                req.abort();
+            } else {
+                req.continue();
+            }
+        });
+        await page.goto(url, {
+            waitUntil: 'networkidle0'
+        });
+        let data = await page.evaluate(() => {
+            var sections = document.querySelector('section.event.event--live.event--summary');
+            var divs = sections.getElementsByTagName('div');
+            var match_info = [];
+            for (var i = 0; i < divs.length; i += 1) {
+                var current = divs[i];
+                if (current.id != '') {
+                    match_info.push(current.innerText.split("\n"));
+                }
+            }
+            return match_info;
+        });
+
         data = parseJSON(data);
         console.log(data);
         await browser.close();
