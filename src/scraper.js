@@ -14,7 +14,6 @@ class MatchInstance {
 
 function parseJSON(match_info) {
     var final_json = []
-    var match_info_json = {};
 
     if (match_info.length === 0) {
         return ["No matches have taken place in the last 24 hours."];
@@ -85,8 +84,10 @@ export async function getDataFromCompName(country, comp) {
         });
         let data = await page.evaluate(() => {
             var sections = document.querySelector('section.event.event--live.event--summary');
-            var divs = sections.getElementsByTagName('div');
+            var divs = Array.from(sections.getElementsByTagName('div'));
             var match_info = [];
+            console.log(divs.length)
+
             for (var i = 0; i < divs.length; i += 1) {
                 var current = divs[i];
                 if (current.id != '') {
@@ -96,7 +97,6 @@ export async function getDataFromCompName(country, comp) {
             return match_info;
         });
         data = parseJSON(data);
-        console.log(data);
         await browser.close();
         return data;
     } catch (e) {
