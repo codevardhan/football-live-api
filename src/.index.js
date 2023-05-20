@@ -39,4 +39,4 @@ app.use(
 );
 app.listen(8000);
 
-console.log(`🚀 Server ready at http://localhost:8000/score-fetch`);
+console.log(`🚀 Server ready at http://localhost:3000/score-fetch`);

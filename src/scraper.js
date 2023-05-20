@@ -1,7 +1,5 @@
 import puppeteer from 'puppeteer';
 
-// getDataFromCompName("iran", "persian-gulf-pro-league");
-
 class MatchInstance {
     constructor(match_info_json) {
         this.status = match_info_json.status;
@@ -18,16 +16,13 @@ function parseJSON(match_info) {
     var final_json = []
     var match_info_json = {};
 
-    // console.log(match_info);
     if (match_info.length === 0) {
         return ["No matches have taken place in the last 24 hours."];
-      }
+    }
 
     match_info.forEach(match => {
         var match_info_json = {};
-        // console.log(match_info);
         var match_status = match[0];
-        // console.log(match_status);
 
         if (match_status.includes(":")) {
             match_info_json["status"] = "Upcoming";
@@ -37,7 +32,7 @@ function parseJSON(match_info) {
             match_info_json["score_1"] = "NaN";
             match_info_json["score_2"] = "NaN";
             match_info_json["fh_score"] = "NaN";
-        } else if (match_status == "Finished" || match_status=="After Pen.") {
+        } else if (match_status == "Finished" || match_status == "After Pen.") {
             match_info_json["status"] = "Finished";
             match_info_json["time"] = "NaN";
             match_info_json["team_1"] = match[1];

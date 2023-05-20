@@ -3,7 +3,7 @@ import cors from 'cors';
 import { getDataFromCompName } from './scraper.js';
 
 const app = express();
-const PORT = process.env.PORT || 5009;
+const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 
