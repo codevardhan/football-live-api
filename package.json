@@ -1,32 +1,41 @@
 {
-    "name": "football-scores",
-    "version": "1.0.0",
-    "description": "API to get live updates for football matches",
-    "main": "lib/index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "nodemon src/index.js"
-    },
-    "keywords": [
-        "live-updates",
-        "node-js",
-        "rest-api"
-    ],
-    "author": "codevardhan",
-    "license": "MIT",
-    "dependencies": {
-        "axios": "^0.21.1",
-        "cheerio": "^1.0.0-rc.10",
-        "dotenv": "^10.0.0",
-        "express": "^4.17.1",
-        "express-graphql": "^0.12.0",
-        "graphql": "^15.5.1",
-        "log4js": "^6.3.0",
-        "puppeteer": "^16.1.0",
-        "request": "^2.88.2",
-        "yauzl": "^2.10.0"
-    },
-    "devDependencies": {
-        "nodemon": "^2.0.12"
-    }
+  "name": "football-scores",
+  "version": "1.0.0",
+  "description": "API to get live updates for football matches",
+  "type": "module",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/index.js"
+  },
+  "keywords": [
+    "live-updates",
+    "node-js",
+    "rest-api"
+  ],
+  "author": "codevardhan",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "cheerio": "^1.0.0-rc.10",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-graphql": "^0.12.0",
+    "graphql": "^15.5.1",
+    "log4js": "^6.3.0",
+    "puppeteer": "^16.1.0",
+    "request": "^2.88.2",
+    "yauzl": "^2.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codevardhan/football-live-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/codevardhan/football-live-api/issues"
+  },
+  "homepage": "https://github.com/codevardhan/football-live-api#readme"
 }

@@ -1,42 +1,21 @@
-//https://dev-8634341.okta.com/oauth2/default
-const express = require('express');
-const graphqlHTTP = require('express-graphql');
-//const schema = require("./schema");
-const scraper = require("./scraper");
-const { buildSchema } = require("graphql");
-const { data } = require('cheerio/lib/api/attributes');
-
-var schema = buildSchema(`
-  type Query {
-    getMatchesLeague(country: String!, comp: String!): [MatchInstance]
-  }
-
-  type MatchInstance {
-    status: String
-    time: String
-    team_1: String
-    team_2: String
-    score_1: String
-    score_2: String
-    fh_score: String
-  } 
-`);
-
-const resolvers = {
-    getMatchesLeague: ({ country, comp }) => {
-        return scraper.getDataFromCompName(country, comp)
-    }
-};
+import express from 'express';
+import cors from 'cors';
+import { getDataFromCompName } from './scraper.js';
 
 const app = express();
-app.use(
-    "/score-fetch",
-    graphqlHTTP.graphqlHTTP({
-        schema,
-        rootValue: resolvers,
-        graphiql: true,
-    })
-);
-app.listen(8000);
+const PORT = process.env.PORT || 5009;
 
-console.log(`🚀 Server ready at http://localhost:8000/score-fetch`);
+app.use(cors());
+
+app.get('/:country/:comp', async (req, res, next) => {
+  try {
+    const { country, comp } = req.params;
+    const data = await getDataFromCompName(country, comp);
+    console.log(data)
+    res.status(200).json(data);
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.listen(PORT, () => console.log(`🚀 Server ready at http://localhost:${PORT}/`));

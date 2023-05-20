@@ -1,16 +1,16 @@
-const puppeteer = require('puppeteer');
+import puppeteer from 'puppeteer';
 
 // getDataFromCompName("iran", "persian-gulf-pro-league");
 
 class MatchInstance {
     constructor(match_info_json) {
-        this.status = match_info_json["status"];
-        this.time = match_info_json["time"];
-        this.team_1 = match_info_json["team_1"];
-        this.team_2 = match_info_json["team_2"];
-        this.score_1 = match_info_json["score_1"];
-        this.score_2 = match_info_json["score_2"];
-        this.fh_score = match_info_json["fh_score"];
+        this.status = match_info_json.status;
+        this.time = match_info_json.time;
+        this.team_1 = match_info_json.team_1;
+        this.team_2 = match_info_json.team_2;
+        this.score_1 = match_info_json.score_1;
+        this.score_2 = match_info_json.score_2;
+        this.fh_score = match_info_json.fh_score;
     }
 }
 
@@ -19,15 +19,14 @@ function parseJSON(match_info) {
     var match_info_json = {};
 
     // console.log(match_info);
-    if (match_info.length == 0) {
-        final_json = ["No matches have taken place in the last 24 hours."]
-        return final_json
-    }
+    if (match_info.length === 0) {
+        return ["No matches have taken place in the last 24 hours."];
+      }
 
     match_info.forEach(match => {
         var match_info_json = {};
         // console.log(match_info);
-        match_status = match[0];
+        var match_status = match[0];
         // console.log(match_status);
 
         if (match_status.includes(":")) {
@@ -73,7 +72,7 @@ function parseJSON(match_info) {
 }
 
 
-async function getDataFromCompName(country, comp) {
+export async function getDataFromCompName(country, comp) {
     var url = "https://www.flashscore.in/football/" + country + "/" + comp;
     try {
         const browser = await puppeteer.launch();
@@ -109,10 +108,3 @@ async function getDataFromCompName(country, comp) {
         console.error(e);
     }
 }
-
-function timeNow() {
-    let time = new Date().toLocaleTimeString([], { hour12: false, hour: '2-digit', minute: '2-digit' });
-    console.log(time)
-}
-
-module.exports = { getDataFromCompName };
